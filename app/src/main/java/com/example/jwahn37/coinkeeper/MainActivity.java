@@ -22,10 +22,10 @@ import com.yalantis.phoenix.PullToRefreshView;
 import com.example.jwahn37.coinkeeper.datas.StaticDatas;
 //git test!
 //git test from site!
-
+//git test2 from site!
 public class MainActivity extends AppCompatActivity {
 
-    int testgit=4;
+    int testgit=5;
     PullToRefreshView mPullToRefreshView;
     Toolbar toolbar;
     String test = "PREDICCTION";
