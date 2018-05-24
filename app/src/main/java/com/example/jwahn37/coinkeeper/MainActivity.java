@@ -25,8 +25,9 @@ import com.example.jwahn37.coinkeeper.datas.StaticDatas;
 
 public class MainActivity extends AppCompatActivity {
 
-    int testgit=7;
-    int testgit1=6;
+    //merge test
+    int mergegit=5;
+    int mergegit1=6;
     PullToRefreshView mPullToRefreshView;
     Toolbar toolbar;
     String test = "PREDICCTION";
