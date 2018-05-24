@@ -1,6 +1,6 @@
-package com.example.jwahn37.coinkeeper_v11.datas;
+package com.example.jwahn37.coinkeeper.datas;
 
-import com.example.jwahn37.coinkeeper_v11.R;
+import com.example.jwahn37.coinkeeper.R;
 
 public class StaticDatas {
 

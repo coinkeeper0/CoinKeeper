@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CoinKeeper_v1.1</string>
+    <string name="app_name">CoinKeeper</string>
     <string name="project_name">Coin Keeper</string>
     <string name="title_activity_settings">Settings</string>
     <string name="ok">OK</string>

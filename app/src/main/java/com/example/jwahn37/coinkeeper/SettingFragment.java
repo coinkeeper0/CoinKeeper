@@ -1,4 +1,4 @@
-package com.example.jwahn37.coinkeeper_v11;
+package com.example.jwahn37.coinkeeper;
 
 
 import android.app.Dialog;
@@ -11,9 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Switch;
-import android.widget.Toast;
-
-import com.example.jwahn37.coinkeeper_v11.R;
 
 public class SettingFragment extends DialogFragment {
 

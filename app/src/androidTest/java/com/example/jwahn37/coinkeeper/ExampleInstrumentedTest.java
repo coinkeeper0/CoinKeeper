@@ -1,4 +1,4 @@
-package com.example.jwahn37.coinkeeper_v11;
+package com.example.jwahn37.coinkeeper;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

@@ -1,4 +1,4 @@
-package com.example.jwahn37.coinkeeper_v11;
+package com.example.jwahn37.coinkeeper;
 
 import org.junit.Test;
 

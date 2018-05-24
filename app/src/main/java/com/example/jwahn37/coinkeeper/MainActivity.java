@@ -1,8 +1,6 @@
-package com.example.jwahn37.coinkeeper_v11;
+package com.example.jwahn37.coinkeeper;
 
 import android.content.Context;
-import android.os.SystemClock;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -11,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -19,16 +16,16 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.example.jwahn37.coinkeeper_v11.R;
-import com.example.jwahn37.coinkeeper_v11.managers.UIManager;
+
+import com.example.jwahn37.coinkeeper.managers.UIManager;
 import com.yalantis.phoenix.PullToRefreshView;
-import com.example.jwahn37.coinkeeper_v11.datas.StaticDatas;
-import java.util.ArrayList;
+import com.example.jwahn37.coinkeeper.datas.StaticDatas;
+//git test!
 
 
 public class MainActivity extends AppCompatActivity {
 
-
+    int testgit=3;
     PullToRefreshView mPullToRefreshView;
     Toolbar toolbar;
     String test = "PREDICCTION";
@@ -42,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Coin Keeper");
+        //git test
 
         //refresh view
         mPullToRefreshView = (PullToRefreshView) findViewById(R.id.pull_to_refresh);

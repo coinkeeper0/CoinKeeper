@@ -1,4 +1,4 @@
-package com.example.jwahn37.coinkeeper_v11;
+package com.example.jwahn37.coinkeeper;
 
 import android.content.Intent;
 import android.os.AsyncTask;

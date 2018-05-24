@@ -1,6 +1,6 @@
-package com.example.jwahn37.coinkeeper_v11.managers;
+package com.example.jwahn37.coinkeeper.managers;
 
-import com.example.jwahn37.coinkeeper_v11.datas.StaticDatas;
+import com.example.jwahn37.coinkeeper.datas.StaticDatas;
 
 
 public class UIManager {
