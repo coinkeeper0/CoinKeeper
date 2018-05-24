@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="15dp">
+
+
+    <Switch
+        android:id="@+id/set_prediction"
+        android:text="예측 알람 설정"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:textOn="on"
+        android:textOff="off"
+
+       />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/set_price_up"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="price">
+        </EditText>
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="이상" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/set_price_down"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="price">
+        </EditText>
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="이하" />
+    </LinearLayout>
+
+</LinearLayout>
