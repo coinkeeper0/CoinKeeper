@@ -20,14 +20,9 @@ import android.widget.Toast;
 import com.example.jwahn37.coinkeeper.managers.UIManager;
 import com.yalantis.phoenix.PullToRefreshView;
 import com.example.jwahn37.coinkeeper.datas.StaticDatas;
-//git test!
-//git test from site!
 
 public class MainActivity extends AppCompatActivity {
 
-    //merge test
-    int mergegit=5;
-    int mergegit1=6;
     PullToRefreshView mPullToRefreshView;
     Toolbar toolbar;
     String test = "PREDICCTION";
