@@ -21,11 +21,11 @@ import com.example.jwahn37.coinkeeper.managers.UIManager;
 import com.yalantis.phoenix.PullToRefreshView;
 import com.example.jwahn37.coinkeeper.datas.StaticDatas;
 //git test!
-
+//git test from site!
 
 public class MainActivity extends AppCompatActivity {
 
-    int testgit=3;
+    int testgit=4;
     PullToRefreshView mPullToRefreshView;
     Toolbar toolbar;
     String test = "PREDICCTION";
