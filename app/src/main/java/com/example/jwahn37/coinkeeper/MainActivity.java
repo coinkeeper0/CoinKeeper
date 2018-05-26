@@ -21,6 +21,7 @@ import com.example.jwahn37.coinkeeper.managers.UIManager;
 import com.yalantis.phoenix.PullToRefreshView;
 import com.example.jwahn37.coinkeeper.datas.StaticDatas;
 
+
 public class MainActivity extends AppCompatActivity {
 
     PullToRefreshView mPullToRefreshView;
