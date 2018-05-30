@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
                 view_situ.setText(uiManager.getPredSitu());
 
             }
-
+//hnello
             if (position == StaticDatas.LAYOUT_GPAPH) {
                 //여기가 그래프 관련 화면 담당하는 모듈입니다 :)
 
