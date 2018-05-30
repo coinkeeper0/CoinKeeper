@@ -18,8 +18,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jwahn37.coinkeeper.managers.UIManager;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.yalantis.phoenix.PullToRefreshView;
 import com.example.jwahn37.coinkeeper.datas.StaticDatas;
+
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -28,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     String test = "PREDICCTION";
     ListviewAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,14 +132,24 @@ public class MainActivity extends AppCompatActivity {
             }
 
             if (position == StaticDatas.LAYOUT_GPAPH) {
-
                 //여기가 그래프 관련 화면 담당하는 모듈입니다 :)
 
                 convertView = inflater.inflate(R.layout.graph, parent, false);
 //                ImageView icon = (ImageView) convertView.findViewById(R.id.imageview);
 //                icon.setImageResource(R.drawable.icon_2);
-                TextView name = (TextView) convertView.findViewById(R.id.textview);
-                name.setText("GRAPH");
+                //TextView name = (TextView) convertView.findViewById(R.id.textview);
+                //name.setText("GRAPH");
+
+                LineChart chart = (LineChart) convertView.findViewById(R.id.lineChart);
+                ArrayList<Entry> entries = new ArrayList<Entry>();
+                entries.add(new Entry(0f, 100f));
+                entries.add(new Entry(1f, 50f));
+                entries.add(new Entry(2f, 150f));
+                entries.add(new Entry(3f, 75f));
+                LineDataSet dataSet = new LineDataSet(entries, "Price");
+                LineData lineData = new LineData(dataSet);
+                chart.setData(lineData);
+                chart.invalidate();
             }
 
             if (position == StaticDatas.LAYOUT_ARTICLE) {
