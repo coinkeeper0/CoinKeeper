@@ -29,7 +29,7 @@ import com.yalantis.phoenix.PullToRefreshView;
 import com.example.jwahn37.coinkeeper.datas.StaticDatas;
 
 import java.util.ArrayList;
-
+//test
 
 public class MainActivity extends AppCompatActivity {
 
