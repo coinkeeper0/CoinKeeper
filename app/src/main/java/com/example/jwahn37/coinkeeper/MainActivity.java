@@ -30,7 +30,7 @@ import com.example.jwahn37.coinkeeper.datas.StaticDatas;
 
 import java.util.ArrayList;
 //test
-
+//test22
 public class MainActivity extends AppCompatActivity {
 
     PullToRefreshView mPullToRefreshView;
