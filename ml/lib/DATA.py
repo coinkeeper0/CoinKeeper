@@ -120,7 +120,8 @@ class Data:
         
             
         self.__add_new_feature__(newFeature=newFeature)
-        self.featureNames.append('ndiff')
+        for i in range(n):
+            self.featureNames.append('ndiff_'+str(i+1))
 
         return
 
