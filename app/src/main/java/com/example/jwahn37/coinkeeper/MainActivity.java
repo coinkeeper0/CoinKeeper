@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.jwahn37.coinkeeper.managers.HTTPManager;
 import com.example.jwahn37.coinkeeper.managers.UIManager;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.YAxis;
@@ -42,6 +43,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /*실험*/
+        HTTPManager httpManager = new HTTPManager();
+        httpManager.execute();
 
         //tool bar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
