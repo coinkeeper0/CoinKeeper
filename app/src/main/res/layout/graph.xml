@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+<!--
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+ -->
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/lineChart"
+        android:layout_width="400dp"
+        android:layout_height="400dp"/>
 
-
-    <TextView
+    <!--TextView
         android:id="@+id/textview"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
 
-        android:gravity="center"/>
+        android:gravity="center"/-->
 
 
 </LinearLayout>
