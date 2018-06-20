@@ -26,6 +26,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.yalantis.phoenix.PullToRefreshView;
 import com.example.jwahn37.coinkeeper.datas.StaticDatas;
 
@@ -33,7 +34,7 @@ import java.util.ArrayList;
 //test
 //test33
 public class MainActivity extends AppCompatActivity {
-
+    private FirebaseAnalytics mFirebaseAnalytics;
     PullToRefreshView mPullToRefreshView;
     Toolbar toolbar;
     String test = "PREDICCTION";
@@ -44,9 +45,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*실험*/
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+       /* Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, id);
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, name);
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+       */
+        /*최초 앱실행서 data를 받안온다.*/
         HTTPManager httpManager = new HTTPManager();
         httpManager.execute();
+        /*이를 그려줘야 함*/
+
+
 
         //tool bar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -64,8 +76,13 @@ public class MainActivity extends AppCompatActivity {
                 //서버로부터 데이터 다시 받아와서 업데이트하자. 이곳에서 서버로부터 데이터를 요청후, view필드에 새로운 데이터삽입한다.
                 //각 UI에 대한 클래스가 존재했으면 함.
                 test="WORLD";
-
                 //여기서 서버로부터 데이터를 받아온다.
+                HTTPManager httpManager = new HTTPManager();
+                httpManager.execute();
+
+                /*이를 그려줘야 함*/
+
+
                 mPullToRefreshView.postDelayed(new Runnable() {
                     @Override
                     public void run() {

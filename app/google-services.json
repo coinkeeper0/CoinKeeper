@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "423380758336",
+    "firebase_url": "https://coinkeeper-b735f.firebaseio.com",
+    "project_id": "coinkeeper-b735f",
+    "storage_bucket": "coinkeeper-b735f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:423380758336:android:2607e721f4808014",
+        "android_client_info": {
+          "package_name": "com.example.jwahn37.coinkeeper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "423380758336-fj9d28t4pskdfbui5ef9vee2449igghf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.jwahn37.coinkeeper",
+            "certificate_hash": "cc86c3fc857158e0b9d829fb4a6eb0ddccd00f95"
+          }
+        },
+        {
+          "client_id": "423380758336-c5gvnhgtsbv85eifp4rp8tvgcsg2m5cr.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "423380758336-c5gvnhgtsbv85eifp4rp8tvgcsg2m5cr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAh7-hHnC0Tb1f6U6YoACP6SOV3Bljd5HY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "423380758336-c5gvnhgtsbv85eifp4rp8tvgcsg2m5cr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
