@@ -28,6 +28,53 @@ public class HTTPManager extends AsyncTask {
     String datas;
     String url_address;
 
+    public void getArticleData()
+    {
+        String articleDatas = new String();
+        try {
+            //http://13.125.254.128:3000/api/news 은 기사를 받아온다.
+            URL url = new URL("http://13.125.254.128:3000/api/news");
+            articleDatas = getDatasFromServer(url);
+            Log.v("article: ", articleDatas);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            JSONArray jsonArray = new JSONArray(articleDatas);
+            JSONObject jsonData = new JSONObject(jsonArray.getString(0));
+          //  BitCoinDatas.setPredictionData(jsonData.getInt("label_0"));
+            BitCoinDatas.setArticleData(jsonData.getString("name"), jsonData.getString("url"),
+                                        jsonData.getString("image_url"),jsonData.getString("description") );
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void getPredictionData()
+    {
+        String predictionDatas = new String();
+        try {
+            //http://13.125.254.128:3000/api/prediction 은 예측값을 받아온다.
+            URL url = new URL("http://13.125.254.128:3000/api/prediction");
+            predictionDatas = getDatasFromServer(url);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            JSONObject jsonData = new JSONObject(predictionDatas);
+            BitCoinDatas.setPredictionData(jsonData.getInt("label_0"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
     public void getGraphData()
     {
         String graphDatas = new String();
@@ -128,7 +175,8 @@ public class HTTPManager extends AsyncTask {
     @Override
     protected Object doInBackground(Object[] objects) {
         getGraphData();
-
+        getPredictionData();
+        getArticleData();
         return null;
     }
 }
