@@ -1,6 +1,11 @@
 package com.example.jwahn37.coinkeeper;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -13,10 +18,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.jwahn37.coinkeeper.datas.BitCoinDatas;
 import com.example.jwahn37.coinkeeper.managers.HTTPManager;
 import com.example.jwahn37.coinkeeper.managers.UIManager;
 import com.github.mikephil.charting.charts.LineChart;
@@ -30,6 +37,12 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.yalantis.phoenix.PullToRefreshView;
 import com.example.jwahn37.coinkeeper.datas.StaticDatas;
 
+import org.w3c.dom.Text;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 //test
 //test33
@@ -54,8 +67,9 @@ public class MainActivity extends AppCompatActivity {
         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
        */
         /*최초 앱실행서 data를 받안온다.*/
-        HTTPManager httpManager = new HTTPManager();
-        httpManager.execute();
+       // HTTPManager httpManager = new HTTPManager();
+       // httpManager.execute();
+
         /*이를 그려줘야 함*/
 
 
@@ -100,10 +114,6 @@ public class MainActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.list_view);
         adapter = new ListviewAdapter(this, uiManager);
         listView.setAdapter(adapter);
-       // SystemClock.sleep(5000);
-       // test="WORLD";
-       // adapter.notifyDataSetChanged();
-
     }
 
     public class ListviewAdapter extends BaseAdapter {
@@ -145,11 +155,13 @@ public class MainActivity extends AppCompatActivity {
 
                 convertView = inflater.inflate(R.layout.prediction, parent, false);
                 ImageView view_weather = (ImageView) convertView.findViewById(R.id.pred_weather);
-                view_weather.setImageResource(uiManager.getPredWeather());
+                view_weather.setImageResource(BitCoinDatas.getPredWeather());
                 TextView view_date = (TextView) convertView.findViewById(R.id.pred_date);
-                view_date.setText(uiManager.getPredDate());
+                view_date.setText(BitCoinDatas.getPredDate());
                 TextView view_situ = (TextView) convertView.findViewById(R.id.pred_situation);
-                view_situ.setText(uiManager.getPredSitu());
+                view_situ.setText(BitCoinDatas.getPredSitu());
+
+//                Log.v("pred date?:", BitCoinDatas.getPredDate());
 
             }
 //hnello
@@ -176,10 +188,35 @@ public class MainActivity extends AppCompatActivity {
 
             if (position == StaticDatas.LAYOUT_ARTICLE) {
                 convertView = inflater.inflate(R.layout.article, parent, false);
-                ImageView icon = (ImageView) convertView.findViewById(R.id.imageview);
+                //ImageView icon = (ImageView) convertView.findViewById(R.id.imageview);
                // icon.setImageResource(R.drawable.icon_3);
-                TextView name = (TextView) convertView.findViewById(R.id.textview);
-                name.setText("ARTICLE");
+               // TextView name = (TextView) convertView.findViewById(R.id.textview);
+                //name.setText("ARTICLE");
+
+                TextView article_title = (TextView) convertView.findViewById(R.id.article_title);
+                //TextView article_description = (TextView) convertView.findViewById(R.id.particle_description);
+
+                article_title.setText(BitCoinDatas.getArticle_title());
+                //article_description.setText(BitCoinDatas.getArticle_description());
+
+                ImageView article_img = (ImageView) convertView.findViewById(R.id.article_img);
+
+                //imgae url 가져오기
+                new DownloadImageTask(article_img)
+                        //.execute("http://image10.bizrate-images.com/resize?sq=60&uid=2216744464");
+                        .execute(BitCoinDatas.getArticle_imgURL());
+
+                LinearLayout article_layout = (LinearLayout) convertView.findViewById(R.id.article_layout);
+                article_layout.setOnClickListener(new View.OnClickListener(){
+
+                    @Override
+                    public void onClick(View view) {
+                        //Log.v("article layout","clicked!");
+                        Uri uri = Uri.parse(BitCoinDatas.getArticle_URL()); // missing 'http://' will cause crashed
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                        startActivity(intent);
+                    }
+                });
             }
 
             return convertView;
@@ -215,11 +252,66 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
 
-
-
-
     }
 
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
+    }
+    /*
+    class ArticleImageURL extends AsyncTask{
+
+        String imgURL;
+        View convertView;
+        Bitmap bmp;
+
+        ArticleImageURL(View view,String url)
+        {
+            imgURL = url;
+            convertView = view;
+        }
+
+        public Bitmap getBmp() {
+            return bmp;
+        }
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            URL img_url = null;
+            try {
+                Log.d("bmp??", imgURL);
+                img_url = new URL(imgURL);
+                bmp = BitmapFactory.decodeStream(img_url.openConnection().getInputStream());
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+    */
 }
 
 

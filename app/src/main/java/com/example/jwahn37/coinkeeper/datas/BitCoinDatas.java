@@ -2,12 +2,19 @@ package com.example.jwahn37.coinkeeper.datas;
 
 import android.util.Log;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class BitCoinDatas {
     static int graph_price[] = new int[7*24*12]; //7일, 5분단위 데이터
     static String graph_date[] = new String[7*24*12];
     static String graph_time[] = new String[7*24*12];
 
     static int prediction;  //-2: 급락, -1: 하락, 0: 유지, 1:상승, 2:급상승
+    static String pred_date;
+    static String pred_situ;
+    static int pred_weather;
+
 
     static String article_title;
     static String article_URL;
@@ -21,12 +28,44 @@ public class BitCoinDatas {
         graph_date[idx] = date;
         graph_time[idx] = time;
 
-        Log.v("set", String.valueOf(idx)+" "+date+" "+time+" "+String.valueOf(price));
+        //Log.v("set", String.valueOf(idx)+" "+date+" "+time+" "+String.valueOf(price));
     }
     public static void setPredictionData(int pred)
     {
         prediction=pred;
-        Log.v("setPredictionData", String.valueOf(prediction));
+        //og.v("setPredictionData", String.valueOf(prediction));
+        switch(prediction)  //-2: 급락, -1: 하락, 0: 유지, 1:상승, 2:급상승
+        {
+            case -2 :   pred_weather = StaticDatas.PRED_SUNNY;
+                        pred_situ = StaticDatas.PRED_RINCREASE;
+                        break;
+
+            case -1:    pred_weather = StaticDatas.PRED_SUNNY;
+                        pred_situ = StaticDatas.PRED_RINCREASE;
+                        break;
+
+            case 0:     pred_weather = StaticDatas.PRED_SUNNY;
+                        pred_situ = StaticDatas.PRED_RINCREASE;
+                        break;
+
+            case 1:     pred_weather = StaticDatas.PRED_SUN_CLOUNDY;
+                        pred_situ = StaticDatas.PRED_INCREASE;
+                        break;
+
+            case 2:     pred_weather = StaticDatas.PRED_SUNNY;
+                        pred_situ = StaticDatas.PRED_RINCREASE;
+                        break;
+
+        }
+
+        SimpleDateFormat sdf = new SimpleDateFormat("E MMM dd HH:mm");
+        pred_date = sdf.format(new Date());
+
+        //Log.v("current_date:",currentDateandTime);
+        //pred_date = "Tue May 27 13:15";
+        //pred_weather = StaticDatas.PRED_SUNNY;
+        //pred_situ =  StaticDatas.PRED_RINCREASE;
+
     }
     public static void setArticleData(String title, String URL, String imgURL, String description)
     {
@@ -39,4 +78,13 @@ public class BitCoinDatas {
         Log.v("article imgurl:", article_imgURL);
         Log.v("article descrip", article_description);
     }
+
+    public static String getPredDate() {return pred_date;}
+    public static String getPredSitu() {return pred_situ;}
+    public static int getPredWeather() {return pred_weather;}
+    public static String getArticle_title() {return article_title;}
+    public static String getArticle_URL(){return article_URL;}
+    public static String getArticle_imgURL(){return article_imgURL;}
+    public static String getArticle_description(){return article_description;}
+
 }

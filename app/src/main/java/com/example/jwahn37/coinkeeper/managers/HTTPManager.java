@@ -43,7 +43,14 @@ public class HTTPManager extends AsyncTask {
 
         try {
             JSONArray jsonArray = new JSONArray(articleDatas);
-            JSONObject jsonData = new JSONObject(jsonArray.getString(0));
+            JSONObject jsonData = null;
+            int i;
+            for(i=0; i<jsonArray.length(); i++)
+            {
+                jsonData = new JSONObject(jsonArray.getString(i));
+                if(jsonData.getString("image_url")!="null")   break;  //imgae url 있으면 리턴
+            }
+            Log.v("current idx: ",String.valueOf(i));
           //  BitCoinDatas.setPredictionData(jsonData.getInt("label_0"));
             BitCoinDatas.setArticleData(jsonData.getString("name"), jsonData.getString("url"),
                                         jsonData.getString("image_url"),jsonData.getString("description") );
@@ -90,38 +97,26 @@ public class HTTPManager extends AsyncTask {
         pastDateandTime=pastDateandTime.replace('_', 'T');
         //format : 2018-06-20T16:53:43
 
-        Log.v("date", currentDateandTime+" "+pastDateandTime );
-
+        //Log.v("date", currentDateandTime+" "+pastDateandTime );
 
         try {
             //http://13.125.254.128:3000/api/currency/2018-06-13T00:00:00/2018-06-20T10:00:00
             //7일전부터 오늘까지의 5분단위 data를 모두 받아온다.
-         //   Log.v("datas ", "http://13.125.254.128:3000/api/currency/"+pastDateandTime+"/"+currentDateandTime);
             URL url = new URL("http://13.125.254.128:3000/api/currency/"+pastDateandTime+"/"+currentDateandTime);
             graphDatas = getDatasFromServer(url);
         } catch (IOException e) {
             e.printStackTrace();
         }
-       // Log.v("here ", graphDatas);
 
         try {
             JSONArray jsonArray = new JSONArray(graphDatas);
-           // JSONObject reader = new JSONObject(graphDatas);
-           // String buf = reader.toString();
-           // JSONArray dates = new JSONArray(buf);
             Log.v("len", String.valueOf(jsonArray.length()));
             for(int i=0; i<jsonArray.length(); i++)
             {
                 String ele = jsonArray.getString(i);
                 JSONObject json_ele = new JSONObject(ele);
-
-           //     Log.v("mydate", ele);
                 BitCoinDatas.setGraphData(i, json_ele.getString("date"), json_ele.getString("time"), json_ele.getInt("price_krw"));
             }
-
-           // JSONObject date  = reader.getJSONObject("sys");
-           // String date = reader.getString("date");
-           // Log.v("json",date);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -147,24 +142,10 @@ public class HTTPManager extends AsyncTask {
                 byte[] tempData = new byte[read];
                 System.arraycopy(buffer, 0, tempData, 0, read);
                 String temp_datas = new String(tempData, "UTF-8");
-                //publishProgress("낯선이 : " + tempString);
                 read = in.read(buffer, 0, 4096);
                 datas = datas.concat(temp_datas);
-               // Log.v("len", String.valueOf(temp_datas.length()));
-               // size_+=temp_datas.length();
-              //  Log.v("str", temp_datas);
             }
-            //Log.v("all size: ",String.valueOf(size_));
-            //Log.v("mysize", String.valueOf(datas.length()));
-            //Log.v("string len",String.valueOf(datas.length()));
-           // Log.v("here2", datas);
-          //  Log.d("here","111");
-            //byte[] b = new byte[4096];
-            //in.read(b,0,4096);
-            //datas = new String(b, "UTF-8");
-            //Log.d(datas, "111");
 
-            //readStream(in);
         } finally {
             urlConnection.disconnect();
         }
