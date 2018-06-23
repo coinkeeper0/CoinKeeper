@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -22,11 +23,13 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.RelativeLayout;
 
 import com.example.jwahn37.coinkeeper.datas.BitCoinDatas;
 import com.example.jwahn37.coinkeeper.managers.HTTPManager;
 import com.example.jwahn37.coinkeeper.managers.UIManager;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -67,8 +70,8 @@ public class MainActivity extends AppCompatActivity {
         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
        */
         /*최초 앱실행서 data를 받안온다.*/
-       // HTTPManager httpManager = new HTTPManager();
-       // httpManager.execute();
+        //HTTPManager httpManager = new HTTPManager();
+        //httpManager.execute();
 
         /*이를 그려줘야 함*/
 
@@ -175,14 +178,45 @@ public class MainActivity extends AppCompatActivity {
                 //name.setText("GRAPH");
 
                 LineChart chart = (LineChart) convertView.findViewById(R.id.lineChart);
+
+                chart.getDescription().setEnabled(false);
+
                 ArrayList<Entry> entries = new ArrayList<Entry>();
-                entries.add(new Entry(0f, 100f));
-                entries.add(new Entry(1f, 50f));
-                entries.add(new Entry(2f, 150f));
-                entries.add(new Entry(3f, 75f));
-                LineDataSet dataSet = new LineDataSet(entries, "Price");
+                for(int i = 0; i < 7*24*12; i++){
+                    entries.add(new Entry(i, BitCoinDatas.getGraphPrice()[i]));
+                }
+
+                LineDataSet dataSet = new LineDataSet(entries, "Bitcoin Price Last 7 Days");
+                dataSet.setLineWidth(1);
+                dataSet.setDrawCircles(false);
+                dataSet.setColor(Color.parseColor("#FF8d0c4d"));
+                dataSet.setDrawHorizontalHighlightIndicator(false);
+                dataSet.setDrawHighlightIndicators(false);
+                dataSet.setDrawValues(false);
+
                 LineData lineData = new LineData(dataSet);
+
+                XAxis xAxis = chart.getXAxis();
+                xAxis.setEnabled(false);
+                xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+                //xAxis.setTextColor(Color.BLACK);
+                xAxis.enableGridDashedLine(8, 24, 0);
+                //xAxis.setGranularityEnabled(true);
+                //xAxis.setGranularity(24*12);
+
+                YAxis yLAxis = chart.getAxisLeft();
+                //yLAxis.setTextColor(Color.BLACK);
+
+                YAxis yRAxis = chart.getAxisRight();
+                yRAxis.setDrawLabels(false);
+                yRAxis.setDrawAxisLine(false);
+                yRAxis.setDrawGridLines(false);
+
+                chart.setDoubleTapToZoomEnabled(false);
+                chart.setDrawGridBackground(false);
+
                 chart.setData(lineData);
+
                 chart.invalidate();
             }
 
@@ -206,7 +240,8 @@ public class MainActivity extends AppCompatActivity {
                         //.execute("http://image10.bizrate-images.com/resize?sq=60&uid=2216744464");
                         .execute(BitCoinDatas.getArticle_imgURL());
 
-                LinearLayout article_layout = (LinearLayout) convertView.findViewById(R.id.article_layout);
+                //LinearLayout article_layout = (LinearLayout) convertView.findViewById(R.id.article_layout);
+                RelativeLayout article_layout = (RelativeLayout) convertView.findViewById(R.id.article_layout);
                 article_layout.setOnClickListener(new View.OnClickListener(){
 
                     @Override
