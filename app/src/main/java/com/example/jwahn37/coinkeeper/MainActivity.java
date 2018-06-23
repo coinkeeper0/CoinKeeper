@@ -93,9 +93,9 @@ public class MainActivity extends AppCompatActivity {
                 //여기서 서버로부터 데이터를 받아온다.
                 HTTPManager httpManager = new HTTPManager();
                 httpManager.execute();
+                //httpManager.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
                 /*이를 그려줘야 함*/
-
 
                 mPullToRefreshView.postDelayed(new Runnable() {
                     @Override
@@ -205,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
                 new DownloadImageTask(article_img)
                         //.execute("http://image10.bizrate-images.com/resize?sq=60&uid=2216744464");
                         .execute(BitCoinDatas.getArticle_imgURL());
-
+                        //.execute("https://www.bing.com/th?id=ON.8B3BCDA5C82E42ADAB53F5712377C2D9&pid=News");
                 LinearLayout article_layout = (LinearLayout) convertView.findViewById(R.id.article_layout);
                 article_layout.setOnClickListener(new View.OnClickListener(){
 
