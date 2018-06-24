@@ -70,8 +70,8 @@ public class MainActivity extends AppCompatActivity {
         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
        */
         /*최초 앱실행서 data를 받안온다.*/
-        //HTTPManager httpManager = new HTTPManager();
-        //httpManager.execute();
+       // HTTPManager httpManager = new HTTPManager();
+       // httpManager.execute();
 
         /*이를 그려줘야 함*/
 

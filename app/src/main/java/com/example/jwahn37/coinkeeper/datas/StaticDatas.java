@@ -5,7 +5,7 @@ import com.example.jwahn37.coinkeeper.R;
 public class StaticDatas {
 
     //UI layout
-    public static final int REFRESH_DELAY=1000;
+    public static final int REFRESH_DELAY=2000;
     public static final int NUM_LAYOUT= 3;
     public static final int LAYOUT_PREDICTION = 0;
     public static final int LAYOUT_GPAPH = 1;
@@ -29,5 +29,9 @@ public class StaticDatas {
     public static final int NUM_PRED = 5;
     public static final int PRED_DATE = 0;
     public static final int PRED_WEATHER = 1;
-    public static final int PRED_SITUATION = 2;
+    public static final int PREDf_SITUATION = 2;
+
+    public static final String PUSH_NAME = "push_bitcoin";
+    public static final String PUSH_DESCRIPTION = "push_bitcoin_user";
+    public static final String PUSH_CAHNNEL_ID = "12345";
 }
