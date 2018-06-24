@@ -56,7 +56,6 @@ public class SettingFragment extends DialogFragment {
                     }
                 });
 
-        set_pred = v.findViewById(R.id.set_prediction);
         price_up = v.findViewById(R.id.set_price_up);
         price_down = v.findViewById(R.id.set_price_down);
 

@@ -26,6 +26,7 @@ public class StaticDatas {
     public static final String PRED_NORMAL = "유지";
     public static final String PRED_DECREASE = "하락";
     public static final String PRED_RDECREASE = "급하락";
+
     public static final int NUM_PRED = 5;
     public static final int PRED_DATE = 0;
     public static final int PRED_WEATHER = 1;

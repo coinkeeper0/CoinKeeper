@@ -35,19 +35,19 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
             //sendNotification(remoteMessage.getNotification().getBody());
-            sendNotification(remoteMessage.getData().get("message"));
+            sendNotification(remoteMessage.getData().get("message"), remoteMessage.getNotification().getTitle());
         }
 
 // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
-            sendNotification(remoteMessage.getNotification().getBody());
+            sendNotification(remoteMessage.getNotification().getBody(),remoteMessage.getNotification().getTitle());
 
         }
 
     }
 
-    private void sendNotification(String messageBody) {
+    private void sendNotification(String messageBody, String title) {
 
         // Create an explicit intent for an Activity in your app
         Intent intent = new Intent(this, MainActivity.class);
@@ -57,7 +57,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, StaticDatas.PUSH_CAHNNEL_ID)
                // .setSmallIcon(R.drawable.notification_icon)
                 .setSmallIcon(R.drawable.sun)
-                .setContentTitle("Coinkeeper")
+                .setContentTitle(title)
                 .setContentText(messageBody)
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText(messageBody))

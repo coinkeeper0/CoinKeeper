@@ -70,8 +70,8 @@ public class MainActivity extends AppCompatActivity {
         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
        */
         /*최초 앱실행서 data를 받안온다.*/
-       // HTTPManager httpManager = new HTTPManager();
-       // httpManager.execute();
+        // HTTPManager httpManager = new HTTPManager();
+        // httpManager.execute();
 
         /*이를 그려줘야 함*/
 
@@ -225,8 +225,8 @@ public class MainActivity extends AppCompatActivity {
             if (position == StaticDatas.LAYOUT_ARTICLE) {
                 convertView = inflater.inflate(R.layout.article, parent, false);
                 //ImageView icon = (ImageView) convertView.findViewById(R.id.imageview);
-               // icon.setImageResource(R.drawable.icon_3);
-               // TextView name = (TextView) convertView.findViewById(R.id.textview);
+                // icon.setImageResource(R.drawable.icon_3);
+                // TextView name = (TextView) convertView.findViewById(R.id.textview);
                 //name.setText("ARTICLE");
 
                 TextView article_title = (TextView) convertView.findViewById(R.id.article_title);
@@ -273,11 +273,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
-       // return super.onOptionsItemSelected(item);
+        // return super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
             case R.id.action_settings:
                 // User chose the "Settings" item, show the app settings UI...
-               // Toast.makeText(getApplicationContext(), "환경설정 버튼 클릭됨", Toast.LENGTH_LONG).show();
+                // Toast.makeText(getApplicationContext(), "환경설정 버튼 클릭됨", Toast.LENGTH_LONG).show();
                 SettingFragment settingFragment = new SettingFragment();
                 settingFragment.show(getSupportFragmentManager(), "SETTING");
 
@@ -285,7 +285,7 @@ public class MainActivity extends AppCompatActivity {
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
-               // Toast.makeText(getApplicationContext(), "나머지 버튼 클릭됨", Toast.LENGTH_LONG).show();
+                // Toast.makeText(getApplicationContext(), "나머지 버튼 클릭됨", Toast.LENGTH_LONG).show();
                 return super.onOptionsItemSelected(item);
         }
 
@@ -326,44 +326,7 @@ public class MainActivity extends AppCompatActivity {
             return null;
         }
     }
-    /*
-    class ArticleImageURL extends AsyncTask{
 
-        String imgURL;
-        View convertView;
-        Bitmap bmp;
-
-        ArticleImageURL(View view,String url)
-        {
-            imgURL = url;
-            convertView = view;
-        }
-
-        public Bitmap getBmp() {
-            return bmp;
-        }
-
-        @Override
-        protected Object doInBackground(Object[] objects) {
-            URL img_url = null;
-            try {
-                Log.d("bmp??", imgURL);
-                img_url = new URL(imgURL);
-                bmp = BitmapFactory.decodeStream(img_url.openConnection().getInputStream());
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-    }
-    */
 }
-
-
-
-
 
 
