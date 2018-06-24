@@ -44,15 +44,16 @@ public class LaunchActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            HTTPManager httpManager = new HTTPManager();
-            httpManager.execute();
+
             createNotificationChannel();
 
         }
 
         @Override
         protected Void doInBackground(Integer... params) {
-
+            HTTPManager httpManager = new HTTPManager();
+            // httpManager.execute();
+            httpManager.getBitcoinDatas();
             //httpManager.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
            // String str_result= new RunInBackGround().execute().get();
             Log.d("test", "execute");

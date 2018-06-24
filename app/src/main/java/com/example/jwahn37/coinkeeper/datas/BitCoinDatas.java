@@ -86,5 +86,4 @@ public class BitCoinDatas {
     public static String getArticle_URL(){return article_URL;}
     public static String getArticle_imgURL(){return article_imgURL;}
     public static String getArticle_description(){return article_description;}
-
-}
+   }

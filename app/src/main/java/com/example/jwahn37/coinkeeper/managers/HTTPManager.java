@@ -5,6 +5,7 @@ import android.text.format.Time;
 import android.util.Log;
 
 import com.example.jwahn37.coinkeeper.datas.BitCoinDatas;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -12,6 +13,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -22,7 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class HTTPManager extends AsyncTask {
+public class HTTPManager{
 
     //URL url;
     String datas;
@@ -152,12 +154,84 @@ public class HTTPManager extends AsyncTask {
         return datas;
 
     }
+    public void getBitcoinDatas(){
+        getGraphData();
+        getPredictionData();
+        getArticleData();
+    }
 
+    public void setUpperLower(String upper, String lower)
+    {
+        String deviceId=FirebaseInstanceId.getInstance().getToken(); //token is ID
+        String upperLower = new String();
+        try {
+            //http://13.125.254.128:3000/api/prediction 은 예측값을 받아온다.
+            URL url = new URL("http://13.125.254.128:3000/api/account/"+deviceId);
+            upperLower = SetDatasToServer(url, upper, lower);
+            Log.v("token", deviceId);
+            Log.v("token len", String.valueOf(deviceId.length()));
+            Log.v("set price", upperLower);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public String SetDatasToServer(URL url, String upper, String lower) throws IOException {
+        String datas = new String();
+
+        //String upperPrice=BitCoinDatas.getUpperPrice();
+        //String lowerPrice=BitCoinDatas.getLowerPrice();
+        String body = "upper="+upper+"&lower="+lower;
+
+        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+
+        try {
+            urlConnection.setRequestMethod("POST");
+            urlConnection.setDoOutput(true);
+            urlConnection.setChunkedStreamingMode(0);
+           // urlConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            OutputStream out = urlConnection.getOutputStream();
+            out.write( body.getBytes("euc-kr") );
+            out.flush();
+            out.close();
+            Log.v("finissh", "post");
+
+
+
+            InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+
+                byte[] buffer = new byte[4096];
+                int read = in.read(buffer, 0, 4096);
+
+                int size_=0;
+                while (read != -1) {
+
+                    byte[] tempData = new byte[read];
+                    System.arraycopy(buffer, 0, tempData, 0, read);
+                    String temp_datas = new String(tempData, "UTF-8");
+                    read = in.read(buffer, 0, 4096);
+              //      Log.v("give me",temp_datas);
+                    datas = datas.concat(temp_datas);
+            }
+
+        } finally {
+            urlConnection.disconnect();
+        }
+        Log.v("finish function","zzz");
+        Log.v("datas", datas);
+       // datas="HELLO";
+        return datas;
+    }
+
+/*
     @Override
-    protected Object doInBackground(Object[] objects) {
+    protected Object doInBackground(int cmd) {
         getGraphData();
         getPredictionData();
         getArticleData();
         return null;
     }
+    */
 }

@@ -91,8 +91,10 @@ public class MainActivity extends AppCompatActivity {
                 //각 UI에 대한 클래스가 존재했으면 함.
                 test="WORLD";
                 //여기서 서버로부터 데이터를 받아온다.
-                HTTPManager httpManager = new HTTPManager();
-                httpManager.execute();
+                BitcoinDatasFromServer bitcoinDatasFromServer = new BitcoinDatasFromServer();
+                bitcoinDatasFromServer.execute();
+                //HTTPManager httpManager = new HTTPManager();
+                //httpManager.execute();
                 //httpManager.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
                 /*이를 그려줘야 함*/
@@ -240,7 +242,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_settings:
                 // User chose the "Settings" item, show the app settings UI...
-                Toast.makeText(getApplicationContext(), "환경설정 버튼 클릭됨", Toast.LENGTH_LONG).show();
+               // Toast.makeText(getApplicationContext(), "환경설정 버튼 클릭됨", Toast.LENGTH_LONG).show();
                 SettingFragment settingFragment = new SettingFragment();
                 settingFragment.show(getSupportFragmentManager(), "SETTING");
 
@@ -276,6 +278,17 @@ public class MainActivity extends AppCompatActivity {
 
         protected void onPostExecute(Bitmap result) {
             bmImage.setImageBitmap(result);
+        }
+    }
+
+    class BitcoinDatasFromServer extends AsyncTask{
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            HTTPManager httpManager = new HTTPManager();
+            // httpManager.execute();
+            httpManager.getBitcoinDatas();
+            return null;
         }
     }
     /*
