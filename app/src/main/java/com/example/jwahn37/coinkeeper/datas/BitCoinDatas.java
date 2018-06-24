@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class BitCoinDatas {
-    static int graph_price[] = new int[7*24*12]; //7일, 5분단위 데이터
+    static float graph_price[] = new float[7*24*12]; //7일, 5분단위 데이터
     static String graph_date[] = new String[7*24*12];
     static String graph_time[] = new String[7*24*12];
 
@@ -36,16 +36,16 @@ public class BitCoinDatas {
         //og.v("setPredictionData", String.valueOf(prediction));
         switch(prediction)  //-2: 급락, -1: 하락, 0: 유지, 1:상승, 2:급상승
         {
-            case -2 :   pred_weather = StaticDatas.PRED_SUNNY;
-                        pred_situ = StaticDatas.PRED_RINCREASE;
+            case -2 :   pred_weather = StaticDatas.PRED_THUNDER;
+                        pred_situ = StaticDatas.PRED_RDECREASE;
                         break;
 
-            case -1:    pred_weather = StaticDatas.PRED_SUNNY;
-                        pred_situ = StaticDatas.PRED_RINCREASE;
+            case -1:    pred_weather = StaticDatas.PRED_RAINY;
+                        pred_situ = StaticDatas.PRED_DECREASE;
                         break;
 
-            case 0:     pred_weather = StaticDatas.PRED_SUNNY;
-                        pred_situ = StaticDatas.PRED_RINCREASE;
+            case 0:     pred_weather = StaticDatas.PRED_CLOUDY;
+                        pred_situ = StaticDatas.PRED_NORMAL;
                         break;
 
             case 1:     pred_weather = StaticDatas.PRED_SUN_CLOUNDY;
@@ -79,6 +79,9 @@ public class BitCoinDatas {
         Log.v("article descrip", article_description);
     }
 
+    public static String[] getGraphDate() {return graph_date;}
+    public static String[] getGraphTime() {return graph_time;}
+    public static float[] getGraphPrice() {return graph_price;}
     public static String getPredDate() {return pred_date;}
     public static String getPredSitu() {return pred_situ;}
     public static int getPredWeather() {return pred_weather;}
